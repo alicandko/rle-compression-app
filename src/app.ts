@@ -26,5 +26,5 @@ app.use('/', itemRouter);
 
 app.listen(config.app.port, () =>
 	// tslint:disable-next-line:no-console
-	console.log(`App listening on port ${config.app.port}!`)
+	console.log(`App listening on port ${config.app.port}`)
 );
