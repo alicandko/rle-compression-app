@@ -1,1 +1,1 @@
-export { EncodedItem } from './EncodedItem';
+export { IEncodedItem } from './IEncodedItem';

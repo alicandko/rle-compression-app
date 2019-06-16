@@ -1,13 +1,13 @@
 import { Observable } from 'rxjs';
-import { reduce, mergeAll } from 'rxjs/operators';
-import { EncodedItem } from '../model';
+import { mergeAll, reduce } from 'rxjs/operators';
+import { IEncodedItem } from '../model';
 
 export function encodeRle(
 	observableItems: Observable<any>
-): Observable<Array<EncodedItem>> {
+): Observable<IEncodedItem[]> {
 	return observableItems.pipe(
 		mergeAll(),
-		reduce((acc: Array<EncodedItem>, currItem: string): Array<EncodedItem> => {
+		reduce((acc: IEncodedItem[], currItem: string): IEncodedItem[] => {
 			const lastEncodedItem = acc[acc.length - 1];
 			if (lastEncodedItem === undefined) {
 				return [...acc, { item: currItem, count: 1 }];

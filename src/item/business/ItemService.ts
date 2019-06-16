@@ -1,17 +1,17 @@
 import fetch, { FetchError } from 'node-fetch';
 import { Observable } from 'rxjs';
-import { encodeRle } from './encoding';
-import { EncodedItem } from '../model';
 import { ITEMS_URL } from '../../config';
+import { IEncodedItem } from '../model';
+import { encodeRle } from './encoding';
 
 export class ItemService {
-	encodedItemsCache: Array<EncodedItem>;
+	public encodedItemsCache: IEncodedItem[];
 
 	constructor(encodedItemsCache) {
 		this.encodedItemsCache = encodedItemsCache;
 	}
 
-	public fetchItems(): Observable<Array<EncodedItem>> {
+	public fetchItems(): Observable<IEncodedItem[]> {
 		const observableOfItems = new Observable(subscriber => {
 			fetch(ITEMS_URL).then(response => {
 				const body = response.body;
@@ -32,8 +32,7 @@ export class ItemService {
 
 	public getItemsInIndex(searchIndex: number): string {
 		let currIndex = -1;
-		console.log(JSON.stringify(this.encodedItemsCache));
-		for (let encodedItem of this.encodedItemsCache) {
+		for (const encodedItem of this.encodedItemsCache) {
 			const { count, item } = encodedItem;
 			currIndex += count;
 			if (searchIndex <= currIndex) {

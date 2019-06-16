@@ -1,4 +1,4 @@
-export interface EncodedItem {
+export interface IEncodedItem {
 	item: string;
 	count: number;
 }

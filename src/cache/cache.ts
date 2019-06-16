@@ -6,7 +6,6 @@ const itemService = new ItemService([]);
 const cache = new Map();
 
 export function initCache() {
-	console.log({ itemService });
 	fetchAndSetItems();
 	setInterval(fetchAndSetItems, TTL);
 	return cache;
