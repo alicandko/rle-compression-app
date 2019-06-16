@@ -3,7 +3,7 @@ import { mergeAll, reduce } from 'rxjs/operators';
 import { IEncodedItem } from '../model';
 
 export function encodeRle(
-	observableItems: Observable<any>
+	observableItems: Observable<string[]>
 ): Observable<IEncodedItem[]> {
 	return observableItems.pipe(
 		mergeAll(),
