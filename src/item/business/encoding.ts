@@ -1,12 +1,8 @@
 import { Observable } from 'rxjs';
 import { reduce, mergeAll } from 'rxjs/operators';
+import { EncodedItem } from '../model';
 
-export interface EncodedItem {
-	item: string;
-	count: number;
-}
-
-export function encode(
+export function encodeRle(
 	observableItems: Observable<any>
 ): Observable<Array<EncodedItem>> {
 	return observableItems.pipe(

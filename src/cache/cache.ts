@@ -1,4 +1,4 @@
-import { ItemService } from '../ItemService';
+import { ItemService } from '../item';
 
 const TTL = 10000;
 

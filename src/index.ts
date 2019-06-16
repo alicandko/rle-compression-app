@@ -1,6 +1,6 @@
 import express from 'express';
 import { initCache } from './cache';
-import { ItemService } from './ItemService';
+import { ItemService } from './item';
 
 const app = express();
 const port = 1337;

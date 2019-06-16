@@ -1,9 +1,8 @@
 import fetch, { FetchError } from 'node-fetch';
 import { Observable } from 'rxjs';
-import { encode } from './encoding';
-import { EncodedItem } from './encoding';
-
-const ITEMS_URL = 'http://localhost:8080/';
+import { encodeRle } from './encoding';
+import { EncodedItem } from '../model';
+import { ITEMS_URL } from '../../config';
 
 export class ItemService {
 	encodedItemsCache: Array<EncodedItem>;
@@ -28,11 +27,7 @@ export class ItemService {
 				});
 			});
 		});
-		return encode(observableOfItems);
-	}
-
-	public getItems(): Array<EncodedItem> {
-		return this.encodedItemsCache;
+		return encodeRle(observableOfItems);
 	}
 
 	public getItemsInIndex(searchIndex: number): string {
