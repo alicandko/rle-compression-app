@@ -5,6 +5,6 @@ import { ItemService } from '../../business/ItemService';
 export function getItem(req: IRequest, res: Response) {
 	const { cache, params } = req;
 	const { index } = params;
-	const item = ItemService.getItemsInIndex(cache.get('encodedItems'), index);
+	const item = ItemService.getItemInIndex(cache.get('encodedItems'), index);
 	res.json({ item });
 }

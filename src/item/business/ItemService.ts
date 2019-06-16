@@ -25,8 +25,8 @@ export class ItemService {
 		return encodeRle(observableOfItems);
 	}
 
-	public static getItemsInIndex(
-		encodedItemsCache,
+	public static getItemInIndex(
+		encodedItemsCache: IEncodedItem[],
 		searchIndex: number
 	): string {
 		let currIndex = -1;
