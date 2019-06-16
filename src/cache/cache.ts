@@ -12,7 +12,7 @@ export function initCache(): Map<string, any> {
 }
 
 function fetchAndSetItems() {
-	ItemService.fetchItems().subscribe(encodedItems => {
+	ItemService.fetchAndEncodeItems().subscribe(encodedItems => {
 		cache.set('encodedItems', encodedItems);
 	});
 }
