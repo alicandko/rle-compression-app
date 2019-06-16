@@ -2,7 +2,6 @@ import { ItemService } from '../item';
 
 const TTL = 10000;
 
-const itemService = new ItemService([]);
 const cache = new Map();
 
 export function initCache() {
@@ -12,7 +11,7 @@ export function initCache() {
 }
 
 function fetchAndSetItems() {
-	itemService.fetchItems().subscribe(encodedItems => {
+	ItemService.fetchItems().subscribe(encodedItems => {
 		cache.set('encodedItems', encodedItems);
 	});
 }

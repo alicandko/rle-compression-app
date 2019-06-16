@@ -3,7 +3,7 @@ import { initCache } from './cache';
 import { itemRouter } from './item/presentation';
 
 export interface IRequest extends express.Request {
-	cache: Map<string, any>; // or any other type
+	cache: Map<string, any>;
 }
 
 const app = express();
