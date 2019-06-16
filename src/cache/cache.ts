@@ -1,12 +1,13 @@
+import { config } from '../config';
 import { ItemService } from '../item';
 
-const TTL = 10000;
+const CACHE_TTL = config.app.cacheTtl;
 
 const cache = new Map();
 
 export function initCache() {
 	fetchAndSetItems();
-	setInterval(fetchAndSetItems, TTL);
+	setInterval(fetchAndSetItems, CACHE_TTL);
 	return cache;
 }
 

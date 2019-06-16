@@ -1,13 +1,14 @@
 import fetch, { FetchError } from 'node-fetch';
 import { Observable } from 'rxjs';
-import { ITEMS_URL } from '../../config';
+import { config } from '../../config';
 import { IEncodedItem } from '../model';
 import { encodeRle } from './encoding';
 
+const ITEMS_API_URL = config.itemsApi.url;
 export class ItemService {
 	public static fetchItems(): Observable<IEncodedItem[]> {
 		const observableOfItems = new Observable(subscriber => {
-			fetch(ITEMS_URL).then(response => {
+			fetch(ITEMS_API_URL).then(response => {
 				const body = response.body;
 				body.on('data', data => {
 					const items = data

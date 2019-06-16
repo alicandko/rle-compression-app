@@ -1,5 +1,6 @@
 import express, { NextFunction, Response } from 'express';
 import { initCache } from './cache';
+import { config } from './config';
 import { itemRouter } from './item/presentation';
 
 export interface IRequest extends express.Request {
@@ -7,7 +8,6 @@ export interface IRequest extends express.Request {
 }
 
 const app = express();
-const port = 1337;
 const cache = initCache();
 
 const cacheMiddleware = function(
@@ -23,5 +23,8 @@ const router = express.Router();
 
 app.use(cacheMiddleware);
 app.use('/', itemRouter);
-// tslint:disable-next-line:no-console
-app.listen(port, () => console.log(`App listening on port ${port}!`));
+
+app.listen(config.app.port, () =>
+	// tslint:disable-next-line:no-console
+	console.log(`App listening on port ${config.app.port}!`)
+);

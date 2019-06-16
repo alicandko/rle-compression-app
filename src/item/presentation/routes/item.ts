@@ -8,6 +8,7 @@ export const itemRouter = router.get(
 	async (req: any, res: any): Promise<any> => {
 		const { cache, params } = req;
 		const { index } = params;
-		res.send(ItemService.getItemsInIndex(cache.get('encodedItems'), index));
+		const item = ItemService.getItemsInIndex(cache.get('encodedItems'), index);
+		res.json({ item });
 	}
 );
