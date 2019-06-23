@@ -17,7 +17,6 @@ function fetchAndSetItems() {
 		encodedItems => {
 			cache.set('encodedItems', encodedItems);
 		},
-		// tslint:disable-next-line:no-console
 		error => console.error('Caching of items failed after 2 retries')
 	);
 }

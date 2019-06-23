@@ -23,13 +23,11 @@ export class ItemService {
 							subscriber.complete();
 						});
 						body.on('error', error => {
-							// tslint:disable-next-line:no-console
 							console.error('An error occurred while streaming from Items API');
 							subscriber.error(error);
 						});
 					})
 					.catch(error => {
-						// tslint:disable-next-line:no-console
 						console.error('Items API can not be reached');
 						subscriber.error(error);
 					});

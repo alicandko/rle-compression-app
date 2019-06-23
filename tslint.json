@@ -6,7 +6,8 @@
     "no-submodule-imports": [
       true,
       "rxjs"
-    ]
+    ],
+    "no-console": false
   },
   "rulesDirectory": ["tslint-plugin-prettier"]
 }
