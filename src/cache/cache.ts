@@ -12,7 +12,11 @@ export function initCache(): Map<string, any> {
 }
 
 function fetchAndSetItems() {
-	ItemService.fetchAndEncodeItems().subscribe(encodedItems => {
-		cache.set('encodedItems', encodedItems);
-	});
+	ItemService.fetchAndEncodeItems().subscribe(
+		encodedItems => {
+			cache.set('encodedItems', encodedItems);
+		},
+		// tslint:disable-next-line:no-console
+		error => console.error('Caching of items failed after 2 retries')
+	);
 }

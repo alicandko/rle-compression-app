@@ -1,5 +1,6 @@
-import fetch, { FetchError } from 'node-fetch';
+import fetch from 'node-fetch';
 import { Observable } from 'rxjs';
+import { retry } from 'rxjs/operators';
 import { config } from '../../config';
 import { IEncodedItem } from '../model';
 import { encodeRle } from './encoding';
@@ -9,21 +10,33 @@ export class ItemService {
 	public static fetchAndEncodeItems(): Observable<IEncodedItem[]> {
 		const observableOfItems: Observable<string[]> = new Observable(
 			subscriber => {
-				fetch(ITEMS_API_URL).then(response => {
-					const body = response.body;
-					body.on('data', data => {
-						const items = data
-							.toString()
-							.split('\n')
-							.filter(item => item !== '');
-						subscriber.next(items);
+				fetch(ITEMS_API_URL)
+					.then(response => {
+						const body = response.body;
+						body.on('data', data => {
+							const items = data
+								.toString()
+								.split('\n')
+								.filter(item => item !== '');
+							subscriber.next(items);
+						});
+						body.on('end', () => {
+							subscriber.complete();
+						});
+						body.on('error', error => {
+							// tslint:disable-next-line:no-console
+							console.error('An error occurred while streaming from Items API');
+							subscriber.error(error);
+						});
+					})
+					.catch(error => {
+						// tslint:disable-next-line:no-console
+						console.error('Items API can not be reached');
+						subscriber.error(error);
 					});
-					body.on('end', () => {
-						subscriber.complete();
-					});
-				});
 			}
-		);
+		).pipe(retry<string[]>(2));
+
 		return encodeRle(observableOfItems);
 	}
 
