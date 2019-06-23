@@ -4,6 +4,7 @@ import { ItemService } from '../item';
 const CACHE_TTL = config.app.cacheTtl;
 
 const cache = new Map();
+cache.set('encodedItems', []);
 
 export function initCache(): Map<string, any> {
 	fetchAndSetItems();
