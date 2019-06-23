@@ -1,7 +1,7 @@
 import express, { NextFunction, Response } from 'express';
 import { initCache } from './cache';
 import { config } from './config';
-import { itemRouter } from './item/presentation';
+import { itemRouter } from './item';
 
 export interface IRequest extends express.Request {
 	cache: Map<string, any>;
