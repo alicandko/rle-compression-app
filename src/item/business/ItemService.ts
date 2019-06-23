@@ -4,8 +4,10 @@ import { retry } from 'rxjs/operators';
 import { config } from '../../config';
 import { IEncodedItem } from '../model';
 import { encodeRle } from './encoding';
+import { transformDataToItems } from './transform';
 
 const ITEMS_API_URL = config.itemsApi.url;
+
 export class ItemService {
 	public static fetchAndEncodeItems(): Observable<IEncodedItem[]> {
 		const observableOfItems: Observable<string[]> = new Observable(
@@ -14,10 +16,7 @@ export class ItemService {
 					.then(response => {
 						const body = response.body;
 						body.on('data', data => {
-							const items = data
-								.toString()
-								.split('\n')
-								.filter(item => item !== '');
+							const items = transformDataToItems(data);
 							subscriber.next(items);
 						});
 						body.on('end', () => {
