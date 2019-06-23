@@ -1,12 +1,12 @@
 import { Observable } from 'rxjs';
-import { mergeAll, reduce } from 'rxjs/operators';
+import { concatAll, reduce } from 'rxjs/operators';
 import { IEncodedItem } from '../model';
 
 export function encodeRle(
 	observableItems: Observable<string[]>
 ): Observable<IEncodedItem[]> {
 	return observableItems.pipe(
-		mergeAll(),
+		concatAll(),
 		reduce((acc: IEncodedItem[], currItem: string): IEncodedItem[] => {
 			const lastEncodedItem = acc[acc.length - 1];
 			if (lastEncodedItem === undefined) {
