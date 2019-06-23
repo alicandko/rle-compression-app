@@ -23,6 +23,11 @@ const router = express.Router();
 
 app.use(cacheMiddleware);
 app.use('/', itemRouter);
+app.use((err: Error, req: IRequest, res: Response, next: NextFunction) => {
+	// tslint:disable-next-line:no-console
+	console.error(err.stack);
+	res.status(500).send('Something went wrong');
+});
 
 app.listen(config.app.port, () =>
 	// tslint:disable-next-line:no-console
